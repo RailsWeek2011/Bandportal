@@ -1,0 +1,44 @@
+Bandportal
+
+Ein kleines soziales Netzwerk ala Myspace, wo sich Bands/Künstler anmelden können.
+Ein Veranstalter kann ein Konzert ausschreiben, worauf sich verschiedene Bands bewerben können.
+
+feature list:
+
+Milestone 0 (Basis-System aufgesetzt)
+
+- Registrierung von Benutzern (Rollenzuweisung: Künstler, Veranstalter, Gäste)
+- Bilden von Künstlergruppen
+- Ausfüllen eines Profils (ohne Medien)
+
+Milestone 1
+
+- Ausschreibung von Veranstaltungen
+- Bewerben für Veranstaltung
+- Auswahl der Künstler(-gruppen), die teilnehmen
+
+Milestone 2
+
+- Verknüpfung der Bands mit anderen (Freundesliste)
+- Anfragen und Bestätigen/Abweisen von Anfragen
+
+Milestone 3
+
+- PN-System
+
+Milestone 4 (Basis-System fertig)
+
+- Kommentieren/Bewerten von Auftritten/Veranstaltungen
+- Gästebuch bei Künstlern(-gruppen)
+- Pinnwand (für alles mögliche)
+- Ticker für neue Bewertungen/Anmeldungen/Veranstaltungen/etc.
+- "Follow" = Neuigkeiten automatisch an empfangende Freunde versenden
+
+Milestone 5 (Features 1)
+
+- Fan-Clubs
+- anhängen an Bands
+
+Milestone 6
+
+- Medien hinzufügen (Videos, Songs, Bilder, etc.)
