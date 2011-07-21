@@ -1,0 +1,56 @@
+<h1>Profilseite von <%= @user.nick %></h1>
+
+<% if @user.host? %>
+    <%= @user.nick %> ist ein Veranstalter.
+<% end %>
+
+<% if @user.artist? %>
+    <%= @user.nick %> ist ein Künstler.
+<% end %>
+
+<% unless @user.name.nil? || @user.prename.nil? %>
+<p>
+  <b>Name:</b>
+    <% unless @user.prename.nil? || @user.prename.length == 0 %>
+        <%= @user.prename %>
+    <% end %>
+
+    <% unless @user.name.nil? || @user.name.length == 0 %>
+        <%= @user.name %>
+    <% end %>
+</p>
+<% end %>
+
+<p>
+  <b>E-Mail:</b>
+  <%= @user.email %>
+</p>
+
+<% unless @user.homepage.nil? || @user.homepage.length == 0 %>
+      <a href="http://<%= @user.homepage %>">Zu <%= @user.nick %>'s Homepage gehen</a>
+<% end %>
+
+<% unless @user.street.nil? || @user.city.nil? || @user.zip.nil? ||
+        @user.street.length == 0 || @user.city.length == 0 || @user.zip.length == 0 %>
+<p>
+  <b>Adresse</b><br />
+  <% unless @user.street.nil? || @user.street.length == 0 %>
+      <%= @user.street %><br />
+  <% end %>
+
+  <% unless @user.zip.nil? %>
+    <%= @user.zip || @user.zip.length == 0 %>
+  <% end %>
+
+  <% unless @user.city.nil? || @user.city.length == 0 %>
+      <%= @user.city %>
+  <% end %>
+</p>
+<% end %>
+
+<% unless @user.about.nil? || @user.about.length == 0 %>
+<p>
+  <b>&Uuml;ber sich selbst:</b><br />
+  <%= @user.about %>
+</p>
+<% end %>

@@ -1,0 +1,9 @@
+<h1>Moerkiels Bandportal</h1>
+
+<% unless user_signed_in? %>
+    <%= link_to "Login",  new_user_session_path %>
+<% else %>
+    <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
+<% end %>
+
+<p>Hello World</p>

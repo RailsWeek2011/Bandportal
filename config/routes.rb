@@ -1,4 +1,12 @@
 Bandportal::Application.routes.draw do
+  root :to => "home#index"
+
+  get "home/index"
+
+  devise_for :users
+
+  get "users/:id" => "users#show", :as => "user_profile"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
