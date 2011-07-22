@@ -4,8 +4,6 @@ class CreateGroups < ActiveRecord::Migration
       t.string :name
       t.string :homepage
 
-      t.references :groupable, :polymorphic => true
-
       t.timestamps
     end
   end

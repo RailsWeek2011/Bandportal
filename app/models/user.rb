@@ -10,4 +10,7 @@ class User < ActiveRecord::Base
                   :show_name, :show_email, :show_street, :show_city
 
   validates :nick, :presence => true
+
+  has_many :memberships, :as => :userable
+  has_many :groups, :through => :memberships
 end

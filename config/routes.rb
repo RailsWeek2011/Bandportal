@@ -1,4 +1,6 @@
 Bandportal::Application.routes.draw do
+  resources :unregistered_users
+
   resources :groups
 
   root :to => "home#index"
