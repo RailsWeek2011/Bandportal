@@ -3,7 +3,7 @@
 <table>
   <tr>
     <th>Prename</th>
-    <th>Surname</th>
+    <th>Name</th>
     <th></th>
     <th></th>
     <th></th>
@@ -12,7 +12,7 @@
 <% @unregistered_users.each do |unregistered_user| %>
   <tr>
     <td><%= unregistered_user.prename %></td>
-    <td><%= unregistered_user.surname %></td>
+    <td><%= unregistered_user.name %></td>
     <td><%= link_to 'Show', unregistered_user %></td>
     <td><%= link_to 'Edit', edit_unregistered_user_path(unregistered_user) %></td>
     <td><%= link_to 'Destroy', unregistered_user, confirm: 'Are you sure?', method: :delete %></td>

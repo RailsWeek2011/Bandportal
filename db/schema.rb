@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110722093045) do
+ActiveRecord::Schema.define(:version => 20110722102739) do
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -31,9 +31,9 @@ ActiveRecord::Schema.define(:version => 20110722093045) do
 
   create_table "unregistered_users", :force => true do |t|
     t.string   "prename"
-    t.string   "surname"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
   end
 
   create_table "users", :force => true do |t|
