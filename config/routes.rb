@@ -11,6 +11,10 @@ Bandportal::Application.routes.draw do
 
   get "users/:id" => "users#show", :as => "user_profile"
 
+  post "groups/:id/add_user" => "groups#add_user", :as => "add_user_to_group"
+  post "groups/:id/add_unreg_user" => "groups#add_unreg_user", :as => "add_unreg_user_to_group"
+  delete "groups/:id/remove_user/:user_type/:user_id" => "groups#remove_user", :as => "remove_user_from_group"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

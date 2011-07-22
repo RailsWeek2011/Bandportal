@@ -7,6 +7,19 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+    <p>
+      <%= link_to "Startseite", root_path %>
+    </p>
+
+    <p>
+        <% unless user_signed_in? %>
+            <%= link_to "Login",  new_user_session_path %>
+        <% else %>
+            <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
+            <%= link_to "Account bearbeiten", edit_user_registration_path %>
+            <%= link_to "Eigenes Profil anzeigen", user_profile_path(current_user) %>
+        <% end %>
+    </p>
 
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>

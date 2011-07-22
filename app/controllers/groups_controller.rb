@@ -1,4 +1,42 @@
 class GroupsController < ApplicationController
+
+  def add_user
+    @group = Group.find(params[:id])
+
+    u = User.find(params[:user_id])
+
+    u.groups << @group
+
+    redirect_to @group
+  end
+
+  def add_unreg_user
+    @group = Group.find(params[:id])
+
+    u = UnregisteredUser.new
+    u.prename = params[:unreg_prename]
+    u.name = params[:unreg_surname]
+    u.save
+
+    u.groups << @group
+
+    redirect_to @group
+  end
+
+  def remove_user
+    @group = Group.find(params[:id])
+
+    Membership.where("group_id = #{params[:id]}
+                      AND userable_id = #{params[:user_id]}
+                      AND userable_type = '#{params[:user_type]}'").first.delete
+
+    if params[:user_type] == "UnregisteredUser"
+      UnregisteredUser.find(params[:user_id]).destroy
+    end
+
+    redirect_to @group
+  end
+
   # GET /groups
   # GET /groups.json
   def index
@@ -14,6 +52,8 @@ class GroupsController < ApplicationController
   # GET /groups/1.json
   def show
     @group = Group.find(params[:id])
+
+    @all_registered_users = (User.all - @group.members)
 
     respond_to do |format|
       format.html # show.html.erb

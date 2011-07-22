@@ -4,7 +4,7 @@
   <tr>
     <th>Name</th>
     <th>Homepage</th>
-    <th></th>
+    <th>Mitglieder</th>
     <th></th>
     <th></th>
   </tr>
@@ -13,10 +13,20 @@
   <tr>
     <td><%= group.name %></td>
     <td><%= group.homepage %></td>
+    <td>
+      <% group.members.each do |m| %>
+          <% unless m.prename.nil? || m.prename.length == 0 || m.name.nil? || m.name.length == 0 %>
+            <%= m.prename %> <%= m.name %><br />
+          <% else %>
+            <%= m.nick %><br />
+          <% end %>
+      <% end %>
+    </td>
     <td><%= link_to 'Show', group %></td>
     <td><%= link_to 'Edit', edit_group_path(group) %></td>
     <td><%= link_to 'Destroy', group, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
+
 <% end %>
 </table>
 
