@@ -6,6 +6,9 @@
   <p><%= f.label :email %><br />
   <%= f.email_field :email %></p>
 
+  <p><%= f.label :show_email %><br />
+  <%= f.check_box :show_email %></p>
+
   <p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
   <%= f.password_field :password %></p>
 
@@ -24,14 +27,23 @@
   <p><%= f.label :name %><br />
   <%= f.text_field :name %></p>
 
+  <p><%= f.label :show_name %><br />
+  <%= f.check_box :show_name %></p>
+
   <p><%= f.label :street %><br />
   <%= f.text_field :street %></p>
+
+  <p><%= f.label :show_street %><br />
+  <%= f.check_box :show_street %></p>
 
   <p><%= f.label :zip %><br />
   <%= f.text_field :zip %></p>
 
   <p><%= f.label :city %><br />
   <%= f.text_field :city %></p>
+
+  <p><%= f.label :show_city %><br />
+  <%= f.check_box :show_city %></p>
 
   <p><%= f.label :homepage %><br />
   http://<%= f.text_field :homepage %></p>

@@ -8,44 +8,54 @@
     <%= @user.nick %> ist ein Künstler.
 <% end %>
 
-<% unless @user.name.nil? || @user.prename.nil? %>
-<p>
-  <b>Name:</b>
-    <% unless @user.prename.nil? || @user.prename.length == 0 %>
-        <%= @user.prename %>
-    <% end %>
+<% if @user.show_name? %>
+    <% unless @user.name.nil? || @user.prename.nil? %>
+    <p>
+      <b>Name:</b>
+        <% unless @user.prename.nil? || @user.prename.length == 0 %>
+            <%= @user.prename %>
+        <% end %>
 
-    <% unless @user.name.nil? || @user.name.length == 0 %>
-        <%= @user.name %>
+        <% unless @user.name.nil? || @user.name.length == 0 %>
+            <%= @user.name %>
+        <% end %>
+    </p>
     <% end %>
-</p>
 <% end %>
 
-<p>
-  <b>E-Mail:</b>
-  <%= @user.email %>
-</p>
+<% if @user.show_email? %>
+    <p>
+      <b>E-Mail:</b>
+      <%= @user.email %>
+    </p>
+<% end %>
 
 <% unless @user.homepage.nil? || @user.homepage.length == 0 %>
       <a href="http://<%= @user.homepage %>">Zu <%= @user.nick %>'s Homepage gehen</a>
 <% end %>
 
-<% unless @user.street.nil? || @user.city.nil? || @user.zip.nil? ||
-        @user.street.length == 0 || @user.city.length == 0 || @user.zip.length == 0 %>
-<p>
-  <b>Adresse</b><br />
-  <% unless @user.street.nil? || @user.street.length == 0 %>
-      <%= @user.street %><br />
-  <% end %>
+<% if @user.show_street? || @user.show_city? %>
+    <% unless @user.street.nil? || @user.city.nil? || @user.zip.nil? ||
+            @user.street.length == 0 || @user.city.length == 0 || @user.zip.length == 0 %>
+        <p>
+          <b>Adresse</b><br />
+          <% if @user.show_street? %>
+              <% unless @user.street.nil? || @user.street.length == 0 %>
+                  <%= @user.street %><br />
+              <% end %>
+          <% end %>
 
-  <% unless @user.zip.nil? %>
-    <%= @user.zip || @user.zip.length == 0 %>
-  <% end %>
+          <% if @user.show_city? %>
+              <% unless @user.zip.nil? %>
+                <%= @user.zip || @user.zip.length == 0 %>
+              <% end %>
 
-  <% unless @user.city.nil? || @user.city.length == 0 %>
-      <%= @user.city %>
-  <% end %>
-</p>
+              <% unless @user.city.nil? || @user.city.length == 0 %>
+                  <%= @user.city %>
+              <% end %>
+          <% end %>
+        </p>
+    <% end %>
 <% end %>
 
 <% unless @user.about.nil? || @user.about.length == 0 %>
