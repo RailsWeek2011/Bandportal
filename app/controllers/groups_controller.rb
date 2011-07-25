@@ -53,6 +53,14 @@ class GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
 
+    if (@group.groupable_type == 'ArtistGroup')
+      @show_class = 'Kuenstlergruppe'
+    elsif (@group.groupable_type == 'FanGroup')
+      @show_class = 'Fangruppe'
+    else
+      @show_class = 'untypisierte Gruppe'
+    end
+
     @all_registered_users = (User.all - @group.members)
 
     respond_to do |format|

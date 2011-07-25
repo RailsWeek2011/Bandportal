@@ -129,10 +129,10 @@ m12= Membership.create :group => g3, :userable => ur6
 
 #Metallica-Fan-Gruppe
 m13= Membership.create :group => g4, :userable => u9
-m14= Membership.create :group => g5, :userable => u10
+m14= Membership.create :group => g4, :userable => u10
 
 #Beatles-Fan-Gruppe
-m15= Membership.create :group => g6, :userable => u10
+m15= Membership.create :group => g5, :userable => u10
 
 puts 'fertig.'
 
@@ -161,7 +161,7 @@ m6.instruments << i2
 m7.instruments << i1
 m7.instruments << i2
 
-m8.instruments << i1
+m8.instruments << i2
 m8.instruments << i4
 
 #Love Muffins

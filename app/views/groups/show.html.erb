@@ -1,6 +1,6 @@
 <p>
   <b>Name:</b>
-  <%= @group.name %>
+  <%= @group.name %> (<%= @show_class %>)
 </p>
 
 <p>
@@ -15,6 +15,18 @@
         <%= m.prename %> <%= m.name %>  <%# unregistrierter Benutzer %>
       <% else %>
         <%= link_to m.nick, user_profile_path(m) %>  <%# registierter Benutzer %>
+      <% end %>
+
+      <% if is_artist_group? @group %>
+        (
+        <% get_instruments(m.id, @group.id).each do |i| %>
+            <% z = 1 %>
+            <% i.each do |e| %>
+               <%= e.abbreviation %><% if z < i.length %>,<% end %>
+               <% z += 1 %>
+            <% end %>
+        <% end %>
+        )
       <% end %>
 
       <%= link_to 'Löschen', remove_user_from_group_path(@group, :user_id => m.id, :user_type => m.class),
