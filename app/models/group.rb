@@ -1,4 +1,6 @@
 class Group < ActiveRecord::Base
+  belongs_to :groupable, :polymorphic => true
+
   has_many :memberships
 
   validates :name, :presence => true

@@ -10,14 +10,46 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110722102739) do
+ActiveRecord::Schema.define(:version => 20110725103808) do
+
+  create_table "artist_groups", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "fan_groups", :force => true do |t|
+    t.integer  "artist_group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "fan_groups", ["artist_group_id"], :name => "index_fan_groups_on_artist_group_id"
 
   create_table "groups", :force => true do |t|
     t.string   "name"
     t.string   "homepage"
+    t.integer  "groupable_id"
+    t.string   "groupable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "instruments", :force => true do |t|
+    t.string   "name"
+    t.string   "abbreviation"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "instruments_memberships", :id => false, :force => true do |t|
+    t.integer  "instrument_id"
+    t.integer  "membership_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "instruments_memberships", ["instrument_id"], :name => "index_instruments_memberships_on_instrument_id"
+  add_index "instruments_memberships", ["membership_id"], :name => "index_instruments_memberships_on_membership_id"
 
   create_table "memberships", :force => true do |t|
     t.integer  "userable_id"
@@ -25,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20110722102739) do
     t.integer  "group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "function"
   end
 
   add_index "memberships", ["group_id"], :name => "index_memberships_on_group_id"
