@@ -1,35 +1,20 @@
-<h1>Listing groups</h1>
+<h1>Alle Gruppen</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Homepage</th>
-    <th>Mitglieder</th>
-    <th></th>
-    <th></th>
-  </tr>
+<% mygroups = get_groups_of_user(current_user.id) %>
 
-<% @groups.each do |group| %>
-  <tr>
-    <td><%= group.name %></td>
-    <td><%= group.homepage %></td>
-    <td>
-      <% group.members.each do |m| %>
-          <% unless m.prename.nil? || m.prename.length == 0 || m.name.nil? || m.name.length == 0 %>
-            <%= m.prename %> <%= m.name %><br />
-          <% else %>
-            <%= m.nick %><br />
-          <% end %>
-      <% end %>
-    </td>
-    <td><%= link_to 'Show', group %></td>
-    <td><%= link_to 'Edit', edit_group_path(group) %></td>
-    <td><%= link_to 'Destroy', group, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-
+<% unless mygroups.empty? %>
+    <%= render 'show_group', :groups => mygroups, :title => 'Meine Gruppen',
+                             :show_links => true %>
 <% end %>
-</table>
+
+<%= render 'show_group', :groups => @artist_groups, :title => 'Künstlergruppen' %>
+
+<%= render 'show_group', :groups => @host_groups, :title => 'Veranstaltergruppen' %>
+
+<%= render 'show_group', :groups => @fan_groups, :title => 'Fangruppen' %>
 
 <br />
 
-<%= link_to 'New Group', new_group_path %>
+<% if user_signed_in? %>
+    <%= link_to 'Neue Gruppe erstellen', new_group_path %>
+<% end %>

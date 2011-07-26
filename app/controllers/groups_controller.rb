@@ -42,6 +42,10 @@ class GroupsController < ApplicationController
   def index
     @groups = Group.all
 
+    @host_groups    = Group.where "groupable_type = 'HostGroup'"
+    @fan_groups     = Group.where "groupable_type = 'FanGroup'"
+    @artist_groups  = Group.where "groupable_type = 'ArtistGroup'"
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @groups }
@@ -57,6 +61,8 @@ class GroupsController < ApplicationController
       @show_class = 'Kuenstlergruppe'
     elsif (@group.groupable_type == 'FanGroup')
       @show_class = 'Fangruppe'
+    elsif (@group.groupable_type == 'HostGroup')
+      @show_class = 'Veranstaltergruppe'
     else
       @show_class = 'untypisierte Gruppe'
     end

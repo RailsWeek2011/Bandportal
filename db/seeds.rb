@@ -55,6 +55,9 @@ u10= User.create :name => 'Bader', :prename => 'Markus', :nick => 'moerkb',
                  :about => 'Admin und Programmierer',
                  :host => true, :artist => true
 
+u11= User.create :name => 'Dummy', :prename => 'Klaus', :nick => 'dummy',
+                 :email => 'dummy@unknown.net', :password => 'secret'
+
 puts 'fertig.'
 
 # Unregistrierte Benutzer

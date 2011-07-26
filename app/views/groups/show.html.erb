@@ -29,41 +29,46 @@
         )
       <% end %>
 
-      <%= link_to 'Löschen', remove_user_from_group_path(@group, :user_id => m.id, :user_type => m.class),
-                  :method => :delete %><br />
+      <% if user_signed_in? && user_in_group?(current_user.id, @group.id) %>
+          <%= link_to 'Löschen', remove_user_from_group_path(@group, :user_id => m.id, :user_type => m.class),
+                      :method => :delete %>
+      <% end %>
+      <br />
    <% end %>
 </p>
 
-<% if @all_registered_users.length > 0 %>
+<% if user_signed_in? && user_in_group?(current_user.id, @group.id) %>
+    <% if @all_registered_users.length > 0 %>
+        <p>
+          <b>Registrierte Benutzer hinzuf&uuml;gen:</b>
+          <%= form_tag add_user_to_group_path(@group) do %>
+
+            <%= select_tag "user_id", options_for_select( @all_registered_users.map do |u| [u.nick, u.id] end ) %>
+            <%= submit_tag "zur Gruppe hinzufügen" %>
+
+          <% end %>
+        </p>
+    <% end %>
+
     <p>
-      <b>Registrierte Benutzer hinzuf&uuml;gen:</b>
-      <%= form_tag add_user_to_group_path(@group) do %>
+      <b>Unregistrierten Benutzer hinzuf&uuml;gen:</b>
+      <%= form_tag add_unreg_user_to_group_path(@group) do %>
+        <div class="field">
+            <%= label_tag "Vorname" %>
+            <%= text_field_tag "unreg_prename" %>
+        </div>
 
-        <%= select_tag "user_id", options_for_select( @all_registered_users.map do |u| [u.nick, u.id] end ) %>
-        <%= submit_tag "zur Gruppe hinzufügen" %>
+        <div class="field">
+            <%= label_tag "Nachname" %>
+            <%= text_field_tag "unreg_surname" %>
+        </div>
 
+        <div class="actions">
+          <%= submit_tag "zur Gruppe hinzufügen" %>
+        </div>
       <% end %>
     </p>
 <% end %>
-
-<p>
-  <b>Unregistrierten Benutzer hinzuf&uuml;gen:</b>
-  <%= form_tag add_unreg_user_to_group_path(@group) do %>
-    <div class="field">
-        <%= label_tag "Vorname" %>
-        <%= text_field_tag "unreg_prename" %>
-    </div>
-
-    <div class="field">
-        <%= label_tag "Nachname" %>
-        <%= text_field_tag "unreg_surname" %>
-    </div>
-
-    <div class="actions">
-      <%= submit_tag "zur Gruppe hinzufügen" %>
-    </div>
-  <% end %>
-</p>
 
 <%= link_to 'Edit', edit_group_path(@group) %> |
 <%= link_to 'Back', groups_path %>

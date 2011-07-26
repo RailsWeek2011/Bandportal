@@ -1,0 +1,19 @@
+<% unless defined?(show_links) %>
+    <% show_links = false %>
+<% end %>
+
+<h2><%= title %></h2>
+
+  <% groups.each do |group| %>
+
+    <%= link_to group.name, group %>
+
+    <% if show_links %>
+        <% if user_signed_in? && user_in_group?(current_user.id, group.id) %>
+            (<%= link_to 'Bearbeiten', edit_group_path(group) %>,
+            <%= link_to 'Löschen', group, confirm: 'Möchten Sie die Gruppe wirklich löschen?', method: :delete %>)
+        <% end %>
+    <% end %>
+
+    <br />
+  <% end %>
