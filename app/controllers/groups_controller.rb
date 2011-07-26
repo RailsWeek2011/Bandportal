@@ -91,7 +91,11 @@ class GroupsController < ApplicationController
     elsif (@group.groupable_type == 'FanGroup')
       fg = Group.where "groupable_type = 'ArtistGroup'
                     AND groupable_id   = ?", FanGroup.find(@group.groupable_id).artist_group_id
-      @show_class = "#{fg.first.name} - Fangruppe"
+      if fg.empty?
+        @show_class = "Fangruppe (die zugehoerige Band ist nicht mehr aktiv)"
+      else
+        @show_class = "#{fg.first.name} - Fangruppe"
+      end
     elsif (@group.groupable_type == 'HostGroup')
       @show_class = 'Veranstaltergruppe'
     else
@@ -198,6 +202,13 @@ class GroupsController < ApplicationController
   # DELETE /groups/1.json
   def destroy
     @group = Group.find(params[:id])
+
+    mbs = Membership.where "group_id = ?", @group.id
+
+    mbs.each do |m|
+      m.destroy
+    end
+
     @group.destroy
 
     respond_to do |format|
