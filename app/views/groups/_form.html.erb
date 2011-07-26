@@ -1,4 +1,15 @@
-<%= form_for(@group) do |f| %>
+<% unless defined?(new_action) %>
+    <% new_action = false %>
+<% end %>
+
+<% if new_action %>
+    <% custom_url = group_select_type_path %>
+<% else %>
+    <% custom_url = nil %>
+<% end %>
+
+
+<%= form_for(@group, :url => custom_url) do |f| %>
   <% if @group.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@group.errors.count, "error") %> prohibited this group from being saved:</h2>
@@ -11,6 +22,8 @@
     </div>
   <% end %>
 
+  <%= hidden_field_tag(:user_id, current_user.id) %>
+
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>
@@ -20,7 +33,12 @@
     http://<%= f.text_field :homepage %>
   </div>
 
-
+  <% if new_action %>
+      <div class="field">
+        <%= label_tag :group_type, 'Art der Gruppe' %>
+        <%= select_tag(:group_type, options_for_select([['Künstlergruppe', 1], ['Fangruppe', 2], ['Veranstaltergruppe', 3]])) %>
+      </div>
+  <% end %>
 
   <div class="actions">
     <%= f.submit %>

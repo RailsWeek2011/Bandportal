@@ -34,7 +34,16 @@ class GroupsController < ApplicationController
       UnregisteredUser.find(params[:user_id]).destroy
     end
 
-    redirect_to @group
+    users = Membership.where ("group_id = #{params[:id]}
+                      AND userable_type = 'User'")
+
+
+    unless users.empty?
+      redirect_to @group
+    else
+      @group.destroy
+      redirect_to root_path
+    end
   end
 
   # GET /groups
@@ -60,7 +69,9 @@ class GroupsController < ApplicationController
     if (@group.groupable_type == 'ArtistGroup')
       @show_class = 'Kuenstlergruppe'
     elsif (@group.groupable_type == 'FanGroup')
-      @show_class = 'Fangruppe'
+      fg = Group.where "groupable_type = 'ArtistGroup'
+                    AND groupable_id   = ?", FanGroup.find(@group.groupable_id).artist_group_id
+      @show_class = "#{fg.first.name} - Fangruppe"
     elsif (@group.groupable_type == 'HostGroup')
       @show_class = 'Veranstaltergruppe'
     else
@@ -91,14 +102,42 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
   end
 
-  # POST /groups
-  # POST /groups.json
-  def create
+  def selecttype
+    @group_type = params[:group_type]
+
+    if @group_type.to_i == 2
+      @art_groups = Group.where "groupable_type = 'ArtistGroup'"
+    end
+
     @group = Group.new(params[:group])
 
     respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @group }
+    end
+  end
+
+  # POST /groups
+  # POST /groups.json
+  def create
+    cu = User.find params[:user_id]
+
+    @group = Group.new(params[:group])
+
+    case params[:group_type].to_i
+      when 1
+        @group.groupable = ArtistGroup.create
+      when 2
+        @group.groupable = FanGroup.create :artist_group => ArtistGroup.find(params[:art_group_id].to_i)
+      when 3
+        @group.groupable = HostGroup.create
+    end
+
+    cu.groups << @group
+
+    respond_to do |format|
       if @group.save
-        format.html { redirect_to @group, notice: 'Group was successfully created.' }
+        format.html { redirect_to @group, notice: 'Die Gruppe wurde erfolgreich angelegt.' }
         format.json { render json: @group, status: :created, location: @group }
       else
         format.html { render action: "new" }
