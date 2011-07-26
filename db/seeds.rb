@@ -92,6 +92,12 @@ g5 = Group.create :name => "Beatles-Fan-Club", :groupable => fg2
 fg3 = FanGroup.create :artist_group => ag1
 g6 = Group.create :name => 'noch ein Metallica-Fan-Club', :groupable => fg3
 
+hg1 = HostGroup.create
+g7 = Group.create :name => 'BullshitEvents', :groupable => hg1
+
+hg2 = HostGroup.create
+g8 = Group.create :name => 'Hogwards School of Rock', :groupable => hg2
+
 puts 'fertig.'
 
 # Instrumente
@@ -133,6 +139,13 @@ m14= Membership.create :group => g4, :userable => u10
 
 #Beatles-Fan-Gruppe
 m15= Membership.create :group => g5, :userable => u10
+
+#Bullshit Events
+m16= Membership.create :group => g7, :userable => ur1
+m17= Membership.create :group => g7, :userable => ur3
+
+#Hogwards School of Rock
+m18= Membership.create :group => g8, :userable => u10
 
 puts 'fertig.'
 

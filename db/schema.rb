@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110725103808) do
+ActiveRecord::Schema.define(:version => 20110726074654) do
 
   create_table "artist_groups", :force => true do |t|
     t.datetime "created_at"
@@ -30,6 +30,11 @@ ActiveRecord::Schema.define(:version => 20110725103808) do
     t.string   "homepage"
     t.integer  "groupable_id"
     t.string   "groupable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "host_groups", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
