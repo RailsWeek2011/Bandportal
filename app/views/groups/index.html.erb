@@ -1,10 +1,12 @@
 <h1>Alle Gruppen</h1>
 
-<% mygroups = get_groups_of_user(current_user.id) %>
+<% if user_signed_in? %>
+    <% mygroups = get_groups_of_user(current_user.id) %>
 
-<% unless mygroups.empty? %>
-    <%= render 'show_group', :groups => mygroups, :title => 'Meine Gruppen',
-                             :show_links => true %>
+    <% unless mygroups.empty? %>
+        <%= render 'show_group', :groups => mygroups, :title => 'Meine Gruppen',
+                                 :show_links => true %>
+    <% end %>
 <% end %>
 
 <%= render 'show_group', :groups => @artist_groups, :title => 'Künstlergruppen' %>
