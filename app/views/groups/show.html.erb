@@ -5,7 +5,7 @@
 
 <p>
   <b>Homepage:</b>
-  <%= @group.homepage %>
+  <a href="http://<%= @group.homepage %>"><%= @group.homepage %></a>
 </p>
 
 <p>
@@ -38,13 +38,24 @@
 </p>
 
 <% if user_signed_in? && user_in_group?(current_user.id, @group.id) %>
+
     <% if @all_registered_users.length > 0 %>
         <p>
           <b>Registrierte Benutzer hinzuf&uuml;gen:</b>
           <%= form_tag add_user_to_group_path(@group) do %>
+            <div class="field">
+              <%= select_tag "user_id", options_for_select( @all_registered_users.map do |u| [u.nick, u.id] end ) %>
+            </div>
 
-            <%= select_tag "user_id", options_for_select( @all_registered_users.map do |u| [u.nick, u.id] end ) %>
-            <%= submit_tag "zur Gruppe hinzufügen" %>
+            <% if @is_artist %>
+                <div class="field">
+                  <%= select_tag "instr_id", options_for_select( @all_instruments.map do |u| [u.name, u.id] end ), :multiple => true %>
+                </div>
+            <% end %>
+
+            <div class="field">
+              <%= submit_tag "zur Gruppe hinzufügen" %>
+            </div>
 
           <% end %>
         </p>
@@ -63,6 +74,12 @@
             <%= text_field_tag "unreg_surname" %>
         </div>
 
+        <% if @is_artist %>
+            <div class="field">
+                <%= select_tag "instr_id", options_for_select( @all_instruments.map do |u| [u.name, u.id] end ), :multiple => true %>
+            </div>
+        <% end %>
+
         <div class="actions">
           <%= submit_tag "zur Gruppe hinzufügen" %>
         </div>
@@ -70,5 +87,6 @@
     </p>
 
     <%= link_to 'Edit', edit_group_path(@group) %> |
-    <%= link_to 'Back', groups_path %>
 <% end %>
+
+<%= link_to 'Zurück', groups_path %>

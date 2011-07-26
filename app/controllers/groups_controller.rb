@@ -7,6 +7,15 @@ class GroupsController < ApplicationController
 
     u.groups << @group
 
+    if defined?(params[:instr_id]) && (not params[:instr_id].nil?)
+      m = Membership.where "group_id = #{@group.id}
+                              AND userable_id = #{u.id}
+                              AND userable_type = 'User'"
+      params[:instr_id].each do |i|
+        m.first.instruments << Instrument.find(i)
+      end
+    end
+
     redirect_to @group
   end
 
@@ -19,6 +28,15 @@ class GroupsController < ApplicationController
     u.save
 
     u.groups << @group
+
+    if defined?(params[:instr_id]) && (not params[:instr_id].nil?)
+      m = Membership.where "group_id = #{@group.id}
+                              AND userable_id = #{u.id}
+                              AND userable_type = 'UnregisteredUser'"
+      params[:instr_id].each do |i|
+        m.first.instruments << Instrument.find(i)
+      end
+    end
 
     redirect_to @group
   end
@@ -65,9 +83,12 @@ class GroupsController < ApplicationController
   # GET /groups/1.json
   def show
     @group = Group.find(params[:id])
+    @is_artist = false
 
     if (@group.groupable_type == 'ArtistGroup')
       @show_class = 'Kuenstlergruppe'
+      @all_instruments = Instrument.all
+      @is_artist = true
     elsif (@group.groupable_type == 'FanGroup')
       fg = Group.where "groupable_type = 'ArtistGroup'
                     AND groupable_id   = ?", FanGroup.find(@group.groupable_id).artist_group_id

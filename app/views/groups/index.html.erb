@@ -1,6 +1,9 @@
 <h1>Alle Gruppen</h1>
 
 <% if user_signed_in? %>
+
+    <%= link_to 'Neue Gruppe erstellen', new_group_path %>
+
     <% mygroups = get_groups_of_user(current_user.id) %>
 
     <% unless mygroups.empty? %>
@@ -16,7 +19,3 @@
 <%= render 'show_group', :groups => @fan_groups, :title => 'Fangruppen' %>
 
 <br />
-
-<% if user_signed_in? %>
-    <%= link_to 'Neue Gruppe erstellen', new_group_path %>
-<% end %>
