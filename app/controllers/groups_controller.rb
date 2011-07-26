@@ -46,7 +46,7 @@ class GroupsController < ApplicationController
 
     Membership.where("group_id = #{params[:id]}
                       AND userable_id = #{params[:user_id]}
-                      AND userable_type = '#{params[:user_type]}'").first.delete
+                      AND userable_type = '#{params[:user_type]}'").first.destroy
 
     if params[:user_type] == "UnregisteredUser"
       UnregisteredUser.find(params[:user_id]).destroy
@@ -54,7 +54,6 @@ class GroupsController < ApplicationController
 
     users = Membership.where ("group_id = #{params[:id]}
                       AND userable_type = 'User'")
-
 
     unless users.empty?
       redirect_to @group
@@ -126,7 +125,9 @@ class GroupsController < ApplicationController
   def selecttype
     @group_type = params[:group_type]
 
-    if @group_type.to_i == 2
+    if @group_type.to_i == 1
+      @all_instruments = Instrument.all
+    elsif @group_type.to_i == 2
       @art_groups = Group.where "groupable_type = 'ArtistGroup'"
     end
 
@@ -144,17 +145,27 @@ class GroupsController < ApplicationController
     cu = User.find params[:user_id]
 
     @group = Group.new(params[:group])
+    cu.groups << @group
 
     case params[:group_type].to_i
       when 1
         @group.groupable = ArtistGroup.create
+
+        if defined?(params[:instr_id]) && (not params[:instr_id].nil?)
+          m = Membership.where "group_id = #{@group.id}
+                                  AND userable_id = #{cu.id}
+                                  AND userable_type = 'User'"
+          params[:instr_id].each do |i|
+            m.first.instruments << Instrument.find(i)
+          end
+        end
       when 2
         @group.groupable = FanGroup.create :artist_group => ArtistGroup.find(params[:art_group_id].to_i)
       when 3
         @group.groupable = HostGroup.create
     end
 
-    cu.groups << @group
+
 
     respond_to do |format|
       if @group.save

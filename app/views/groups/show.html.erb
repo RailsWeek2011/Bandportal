@@ -18,15 +18,19 @@
       <% end %>
 
       <% if is_artist_group? @group %>
-        (
-        <% get_instruments(m.id, @group.id).each do |i| %>
-            <% z = 1 %>
-            <% i.each do |e| %>
-               <%= e.abbreviation %><% if z < i.length %>,<% end %>
-               <% z += 1 %>
+        <% users_instruments = get_instruments(m.id, @group.id) %>
+
+        <% unless users_instruments.first.empty? %>
+            (
+            <% users_instruments.each do |i| %>
+                <% z = 1 %>
+                <% i.each do |e| %>
+                   <%= e.abbreviation %><% if z < i.length %>,<% end %>
+                   <% z += 1 %>
+                <% end %>
             <% end %>
+            )
         <% end %>
-        )
       <% end %>
 
       <% if user_signed_in? && user_in_group?(current_user.id, @group.id) %>

@@ -1,2 +1,5 @@
-Für diesen Gruppentyp sind z.Z. keine weiteren Informationen notwendig.<br />
-Bitte klicken Sie auf weiter.
+<div class="field">
+  <%= label_tag :instr_id, 'Bitte wählen Sie die Instrumente aus, die Sie selbst in der Band spielen' %>
+  <br />
+  <%= select_tag "instr_id", options_for_select( @all_instruments.map do |u| [u.name, u.id] end ), :multiple => true %>
+</div>
