@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110726074654) do
+ActiveRecord::Schema.define(:version => 20110727080252) do
 
   create_table "artist_groups", :force => true do |t|
     t.datetime "created_at"
@@ -66,6 +66,21 @@ ActiveRecord::Schema.define(:version => 20110726074654) do
   end
 
   add_index "memberships", ["group_id"], :name => "index_memberships_on_group_id"
+
+  create_table "messages", :force => true do |t|
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.boolean  "sender_deleted",    :default => false
+    t.boolean  "recipient_deleted", :default => false
+    t.boolean  "read",              :default => false
+    t.string   "subject"
+    t.text     "message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "messages", ["recipient_id"], :name => "index_messages_on_recipient_id"
+  add_index "messages", ["sender_id"], :name => "index_messages_on_sender_id"
 
   create_table "unregistered_users", :force => true do |t|
     t.string   "prename"

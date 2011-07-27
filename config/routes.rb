@@ -1,4 +1,6 @@
 Bandportal::Application.routes.draw do
+  get "message/show"
+
   resources :unregistered_users
 
   resources :groups
@@ -8,6 +10,17 @@ Bandportal::Application.routes.draw do
   get "home/index"
 
   devise_for :users
+
+  get "users/message" => "message#show", :as => "user_message"
+
+  get "users/message/recipience" => "message#recipience", :as => "user_recipience_message"
+  get "users/message/:id/recipience/read" => "message#recipience_read", :as => "user_recipience_message_read"
+  delete "users/message/:id/recipience/delete" => "message#recipience_delete", :as => "user_recipience_message_delete"
+
+  get "users/message/sent" => "message#sent", :as => "user_sent_message"
+  get "users/message/:id/sent/read" => "message#sent_read", :as => "user_sent_message_read"
+  delete "users/message/:id/sent/delete" => "message#sent_delete", :as => "user_sent_message_delete"
+
 
   get "users/:id" => "users#show", :as => "user_profile"
 

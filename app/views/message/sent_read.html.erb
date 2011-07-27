@@ -1,0 +1,27 @@
+<h1>Ausgang</h1>
+
+<table>
+
+  <tr>
+    <td><b>Betreff</b></td>
+    <td><b><%= @message.subject %></b></td>
+  </tr>
+
+  <tr>
+    <td><b>Nachricht</b></td>
+    <td><%= @message.message %></td>
+  </tr>
+
+  <tr>
+    <td><b>An</b></td>
+    <td><%= link_to @message.recipient.nick, user_profile_path(@message.recipient) %></td>
+  </tr>
+
+  <tr>
+    <td><b>Gesendet</b></td>
+    <td><%= @message.created_at %></td>
+  </tr>
+
+</table>
+
+<%= link_to 'löschen', user_sent_message_delete_path(@message), :method => :delete %>

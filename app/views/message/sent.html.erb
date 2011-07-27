@@ -1,0 +1,20 @@
+<h1>Ausgang</h1>
+
+<table>
+  <tr>
+    <th>Betreff</th>
+    <th>An</th>
+    <th>Gesendet</th>
+  </tr>
+    <% @messages.each do |m| %>
+      <tr>
+        <td>
+          <% unless m.read %> <b> <% end %>
+          <%= link_to m.subject, user_sent_message_read_path(m.id) %>
+          <% unless m.read %> </b> <% end %>
+        </td>
+        <td><%= link_to m.recipient.nick, user_profile_path(m.recipient) %></td>
+        <td><%= m.created_at %></td>
+      </tr>
+    <% end %>
+</table>

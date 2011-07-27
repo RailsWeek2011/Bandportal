@@ -192,3 +192,15 @@ m11.instruments << i4
 m12.instruments << i3
 
 puts 'fertig.'
+
+#Nachrichten
+
+puts 'Nachrichten werden versendet...'
+
+pm1 = Message.create :sender => u9, :recipient => u10, :subject => 'Test',
+          :message => "Das ist eine Testnachricht", :read => true
+
+pm2 = Message.create :sender=> u10, :recipient => u9, :subject => 'Re: Test',
+          :message => "Das ist eine Testantwort"
+
+puts 'fertig.'

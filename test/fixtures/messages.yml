@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  sender: 
+  recipient: 
+  sender_deleted: false
+  recipient_deleted: false
+  read: false
+
+two:
+  sender: 
+  recipient: 
+  sender_deleted: false
+  recipient_deleted: false
+  read: false

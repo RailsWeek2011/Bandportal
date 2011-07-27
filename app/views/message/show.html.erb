@@ -1,0 +1,13 @@
+<h1>Nachrichten</h1>
+
+<div class="field">
+  <% if @unread_messages.size > 0 %>
+    <%= link_to "Empfangen (#{@unread_messages.size})",
+                user_recipience_message_path %>
+  <% else %>
+    <%= link_to 'Empfangen', user_recipience_message_path %>
+  <% end %>
+</div>
+<div class="field">
+    <%= link_to 'Gesendet', user_sent_message_path %>
+</div>
