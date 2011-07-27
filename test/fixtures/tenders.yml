@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  date: 2011-07-27
+  description: MyText
+  ended: false
+  event: 
+
+two:
+  date: 2011-07-27
+  description: MyText
+  ended: false
+  event: 

@@ -81,8 +81,9 @@ class GroupsController < ApplicationController
   # GET /groups/1
   # GET /groups/1.json
   def show
-    @group = Group.find(params[:id])
-    @is_artist = false
+    @group      = Group.find(params[:id])
+    @is_artist  = false
+    @is_host    = false
 
     if (@group.groupable_type == 'ArtistGroup')
       @show_class = 'Kuenstlergruppe'
@@ -98,6 +99,8 @@ class GroupsController < ApplicationController
       end
     elsif (@group.groupable_type == 'HostGroup')
       @show_class = 'Veranstaltergruppe'
+      @hg = HostGroup.find @group.groupable_id
+      @is_host = true
     else
       @show_class = 'untypisierte Gruppe'
     end

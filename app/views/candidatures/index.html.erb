@@ -1,0 +1,27 @@
+<h1>Listing candidatures</h1>
+
+<table>
+  <tr>
+    <th>Tender</th>
+    <th>Artist group</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @candidatures.each do |candidature| %>
+  <tr>
+    <td><%= candidature.tender %></td>
+    <td><%= candidature.artist_group %></td>
+    <td><%= candidature.description %></td>
+    <td><%= link_to 'Show', candidature %></td>
+    <td><%= link_to 'Edit', edit_candidature_path(candidature) %></td>
+    <td><%= link_to 'Destroy', candidature, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Candidature', new_candidature_path %>

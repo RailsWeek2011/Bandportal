@@ -3,10 +3,18 @@
   <%= @group.name %> (<%= @show_class %>)
 </p>
 
-<p>
-  <b>Homepage:</b>
-  <a href="http://<%= @group.homepage %>"><%= @group.homepage %></a>
-</p>
+<% unless @group.homepage.nil? %>
+    <p>
+      <b>Homepage:</b>
+      <a href="http://<%= @group.homepage %>"><%= @group.homepage %></a>
+    </p>
+<% end %>
+
+<% if user_signed_in? && user_in_group?(current_user.id, @group.id) %>
+  <p>
+    <%= link_to 'Neue Veranstaltung anlegen', new_event_id_path(:host_id => @hg.id) %>
+  </p>
+<% end %>
 
 <p>
   <b>Mitglieder:</b><br />

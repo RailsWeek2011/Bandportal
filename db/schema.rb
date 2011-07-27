@@ -10,12 +10,35 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110727084808) do
+ActiveRecord::Schema.define(:version => 20110727143128) do
 
   create_table "artist_groups", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "candidatures", :force => true do |t|
+    t.integer  "tender_id"
+    t.integer  "artist_group_id"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "candidatures", ["artist_group_id"], :name => "index_candidatures_on_artist_group_id"
+  add_index "candidatures", ["tender_id"], :name => "index_candidatures_on_tender_id"
+
+  create_table "events", :force => true do |t|
+    t.string   "name"
+    t.string   "location"
+    t.datetime "begin"
+    t.datetime "end"
+    t.integer  "host_group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "events", ["host_group_id"], :name => "index_events_on_host_group_id"
 
   create_table "fan_groups", :force => true do |t|
     t.integer  "artist_group_id"
@@ -66,6 +89,27 @@ ActiveRecord::Schema.define(:version => 20110727084808) do
   end
 
   add_index "memberships", ["group_id"], :name => "index_memberships_on_group_id"
+
+  create_table "program_items", :force => true do |t|
+    t.integer  "event_id"
+    t.integer  "artist_group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "program_items", ["artist_group_id"], :name => "index_program_items_on_artist_group_id"
+  add_index "program_items", ["event_id"], :name => "index_program_items_on_event_id"
+
+  create_table "tenders", :force => true do |t|
+    t.date     "date"
+    t.text     "description"
+    t.boolean  "ended",       :default => false
+    t.integer  "event_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tenders", ["event_id"], :name => "index_tenders_on_event_id"
 
   create_table "unregistered_users", :force => true do |t|
     t.string   "prename"

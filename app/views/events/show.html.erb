@@ -1,0 +1,58 @@
+<p id="notice"><%= notice %></p>
+
+<% sg = get_sup_group(@event.host_group_id) %>
+
+<p>
+  <b>Name:</b>
+  <%= @event.name %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%= @event.location %>
+</p>
+
+<p>
+  <b>Begin:</b>
+  <%= @event.begin %>
+</p>
+
+<p>
+  <b>End:</b>
+  <%= @event.end %>
+</p>
+
+<p>
+  <b>Veranstalter:</b>
+  <%= sg.name %>
+</p>
+
+<% unless @sup_ag_groups.empty? %>
+    <p>
+      <b>Programm:</b>
+      <ul>
+        <% @sup_ag_groups.each do |ag| %>
+          <li>
+              <%= ag.name %>
+
+              <% if user_signed_in? && user_is_host?(current_user.id, sg.id) %>
+                <%= link_to 'Loeschen', remove_program_item_path(:event_id => @event.id, :artist_id => ag.id) %>
+              <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </p>
+<% end %>
+
+<% if user_signed_in? && user_is_host?(current_user.id, sg.id) %>
+  <% unless get_unadded_artist_groups(@sup_ag_groups).empty? %>
+      <p>
+        <b>Neuen Programmpunkt hinzufügen</b>
+        <%= render 'program_item', :obj => ProgramItem.new %>
+      </p>
+  <% end %>
+<% end %>
+
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>

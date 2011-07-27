@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  event: 
+  host_group: 
+  begin: 2011-07-27 11:36:38
+  duration: 2011-07-27 11:36:38
+
+two:
+  event: 
+  host_group: 
+  begin: 2011-07-27 11:36:38
+  duration: 2011-07-27 11:36:38

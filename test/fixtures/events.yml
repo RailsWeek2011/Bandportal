@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  location: MyString
+  begin: 2011-07-27 11:36:20
+  end: 2011-07-27 11:36:20
+  host_group: 
+
+two:
+  name: MyString
+  location: MyString
+  begin: 2011-07-27 11:36:20
+  end: 2011-07-27 11:36:20
+  host_group: 

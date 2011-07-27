@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Date:</b>
+  <%= @tender.date %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @tender.description %>
+</p>
+
+<p>
+  <b>Ended:</b>
+  <%= @tender.ended %>
+</p>
+
+<p>
+  <b>Event:</b>
+  <%= @tender.event %>
+</p>
+
+
+<%= link_to 'Edit', edit_tender_path(@tender) %> |
+<%= link_to 'Back', tenders_path %>

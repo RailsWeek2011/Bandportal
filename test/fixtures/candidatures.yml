@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  tender: 
+  artist_group: 
+  description: MyText
+
+two:
+  tender: 
+  artist_group: 
+  description: MyText

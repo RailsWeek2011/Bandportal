@@ -1,0 +1,11 @@
+<%= form_tag add_program_item_path, :method => :post do %>
+
+  <%= hidden_field_tag :event_id, @event.id %>
+
+  <div class="field">
+    <%= label_tag :art_id, 'Kuenstlergruppe' %><br />
+    <%= select_tag "art_id", options_for_select( get_unadded_artist_groups(@sup_ag_groups).map do |g| [g.name, g.id] end ) %>
+    <%= submit_tag 'Hinzufügen' %>
+  </div>
+
+<% end %>

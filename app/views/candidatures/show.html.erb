@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Tender:</b>
+  <%= @candidature.tender %>
+</p>
+
+<p>
+  <b>Artist group:</b>
+  <%= @candidature.artist_group %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @candidature.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_candidature_path(@candidature) %> |
+<%= link_to 'Back', candidatures_path %>

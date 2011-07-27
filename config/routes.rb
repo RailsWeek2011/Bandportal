@@ -1,4 +1,10 @@
 Bandportal::Application.routes.draw do
+  resources :candidatures
+
+  resources :tenders
+
+  resources :events
+
   resources :unregistered_users
 
   resources :groups
@@ -16,6 +22,12 @@ Bandportal::Application.routes.draw do
   post "groups/:id/add_user" => "groups#add_user", :as => "add_user_to_group"
   post "groups/:id/add_unreg_user" => "groups#add_unreg_user", :as => "add_unreg_user_to_group"
   delete "groups/:id/remove_user/:user_type/:user_id" => "groups#remove_user", :as => "remove_user_from_group"
+
+  get "events/:host_id/new" => "events#new", :as => "new_event_id"
+
+  post "events/add_program_item" => "events#add_program_item", :as => "add_program_item"
+
+  get "events/remove_program_item/:event_id/:artist_id" => "events#remove_program_item", :as => "remove_program_item"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
