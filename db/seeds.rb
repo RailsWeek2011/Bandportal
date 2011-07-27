@@ -15,8 +15,7 @@ u1 = User.create :name => 'Hetfield', :prename => 'James', :nick => 'jhetfield',
                  :show_name => true, :show_email => true,
                  :street => 'Bourbon Street 63', :show_street => true,
                  :zip => '33523', :city => 'New York', :show_city => true,
-                 :homepage => 'www.metallica.com',
-                 :host => true, :artist => true
+                 :homepage => 'www.metallica.com'
 
 u2 = User.create :name => 'Ulrich', :prename => 'Jan', :nick => 'julrich',
                  :email => 'julrich@metallica.com', :password => 'secret'
@@ -35,8 +34,7 @@ u6 = User.create :name => 'Harrison', :prename => 'George', :nick => 'gharrison'
                  :show_name => true, :show_email => true,
                  :street => 'Arlington Road 221', :show_street => true,
                  :zip => 'HN 383 F', :city => 'Hunstanton', :show_city => true,
-                 :homepage => 'beatles.com',
-                 :artist => true
+                 :homepage => 'beatles.com'
 
 u7 = User.create :name => 'Lennon', :prename => 'John', :nick => 'jlennon',
                  :email => 'jlennon@beatles.com', :password => 'secret'
@@ -52,8 +50,7 @@ u9 = User.create :name => 'Kirsten', :prename => 'Daniel', :nick => 'Kuerschten'
 u10= User.create :name => 'Bader', :prename => 'Markus', :nick => 'moerkb',
                  :email => 'markus.bader@mni.thm.de', :password => 'secret',
                  :show_name => true, :show_email => true,
-                 :about => 'Admin und Programmierer',
-                 :host => true, :artist => true
+                 :about => 'Admin und Programmierer'
 
 u11= User.create :name => 'Dummy', :prename => 'Klaus', :nick => 'dummy',
                  :email => 'dummy@unknown.net', :password => 'secret'

@@ -1,13 +1,5 @@
 <h1>Profilseite von <%= @user.nick %></h1>
 
-<% if @user.host? %>
-    <%= @user.nick %> ist ein Veranstalter.
-<% end %>
-
-<% if @user.artist? %>
-    <%= @user.nick %> ist ein Künstler.
-<% end %>
-
 <% if @user.show_name? %>
     <% unless @user.name.nil? || @user.prename.nil? %>
     <p>

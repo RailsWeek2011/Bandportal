@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110726074654) do
+ActiveRecord::Schema.define(:version => 20110727084808) do
 
   create_table "artist_groups", :force => true do |t|
     t.datetime "created_at"
@@ -87,8 +87,6 @@ ActiveRecord::Schema.define(:version => 20110726074654) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "artist",                                :default => false
-    t.boolean  "host",                                  :default => false
     t.string   "nick"
     t.string   "prename"
     t.string   "name"
