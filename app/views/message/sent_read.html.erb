@@ -24,4 +24,6 @@
 
 </table>
 
+<%= link_to 'weitere Antwort', user_message_send_to_path(@message.recipient) %>
+|
 <%= link_to 'löschen', user_sent_message_delete_path(@message), :method => :delete %>

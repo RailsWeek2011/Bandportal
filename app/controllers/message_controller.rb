@@ -1,7 +1,12 @@
 #encoding: utf-8
 class MessageController < ApplicationController
   def show
-    @unread_messages = current_user.recieved_messages.where :read => false, :recipient_deleted => false
+    unless current_user.nil?
+      @unread_messages = current_user.recieved_messages.where :read => false, :recipient_deleted => false
+    else
+      redirect_to root_path
+    end
+
   end
 
   def recipience
@@ -55,5 +60,10 @@ class MessageController < ApplicationController
     end
 
     redirect_to user_sent_message_path
+  end
+
+  def send_to
+    @sender = current_user
+    @recipient = User.find(params[:id])
   end
 end

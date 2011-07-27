@@ -1,0 +1,22 @@
+<h1>Nachricht verfassen</h1>
+
+<h3>An <%= @recipient.nick %></h3>
+
+<%= form_tag send_message_path do %>
+  <%= hidden_field 'sender_id', @sender.id %>
+  <%= hidden_field 'recipient_id', @recipient.id %>
+
+  <div class="field">
+    <%= label_tag 'Betreff' %>
+    <%= text_field_tag 'submit',  %>
+  </div>
+
+  <div class="field">
+    <%= label_tag 'Nachricht' %> <br />
+    <%= text_area_tag 'message', nil, :size => "40x10"  %>
+  </div>
+
+  <div class="field">
+    <%= submit_tag 'Senden' %>
+  </div>
+<% end %>

@@ -63,4 +63,5 @@
   <b>&Uuml;ber sich selbst:</b><br />
   <%= @user.about %>
 </p>
+<%= link_to "#{@user.nick} eine Nachricht senden", user_message_send_to_path(@user) %>
 <% end %>
