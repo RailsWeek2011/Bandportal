@@ -10,6 +10,15 @@ class TendersController < ApplicationController
     end
   end
 
+  def active
+    @tenders = Tender.where(:ended => false)
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @tenders }
+    end
+  end
+
   # GET /tenders/1
   # GET /tenders/1.json
   def show
@@ -26,6 +35,12 @@ class TendersController < ApplicationController
   def new
     @tender = Tender.new
 
+    if params[:event_id].nil?
+      @event_id = nil
+    else
+      @event_id = params[:event_id]
+    end
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @tender }
@@ -35,6 +50,8 @@ class TendersController < ApplicationController
   # GET /tenders/1/edit
   def edit
     @tender = Tender.find(params[:id])
+
+    @event_id = @tender.event_id
   end
 
   # POST /tenders

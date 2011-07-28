@@ -1,4 +1,6 @@
 Bandportal::Application.routes.draw do
+  get "tenders/active" => "tenders#active", :as => "tenders_active"
+
   resources :candidatures
 
   resources :tenders
@@ -28,6 +30,10 @@ Bandportal::Application.routes.draw do
   post "events/add_program_item" => "events#add_program_item", :as => "add_program_item"
 
   get "events/remove_program_item/:event_id/:artist_id" => "events#remove_program_item", :as => "remove_program_item"
+
+  get "tenders/:event_id/new" => "tenders#new", :as => "new_tender_id"
+
+  get "candidatures/:tender_id/new" => "candidatures#new", :as => "new_candidature_id"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

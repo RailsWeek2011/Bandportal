@@ -21,6 +21,8 @@ class EventsController < ApplicationController
       @sup_ag_groups << Group.where("groupable_type = 'ArtistGroup' AND groupable_id = ?", ag.id).first
     end
 
+    @tenders = Tender.where("event_id = ?", @event.id).order("ended")
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @event }

@@ -26,6 +26,12 @@ class CandidaturesController < ApplicationController
   def new
     @candidature = Candidature.new
 
+    if params[:tender_id].nil?
+      @tender_id = nil
+    else
+      @tender_id = params[:tender_id]
+    end
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @candidature }
@@ -35,6 +41,8 @@ class CandidaturesController < ApplicationController
   # GET /candidatures/1/edit
   def edit
     @candidature = Candidature.find(params[:id])
+
+    @tender_id = @candidature.tender_id
   end
 
   # POST /candidatures

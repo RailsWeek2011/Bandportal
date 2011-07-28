@@ -45,6 +45,22 @@
 <% end %>
 
 <% if user_signed_in? && user_is_host?(current_user.id, sg.id) %>
+
+  <p>
+    <%= link_to 'Ausschreibung hinzufuegen', new_tender_id_path(:event_id => @event.id) %>
+  </p>
+
+  <% unless @tenders.empty? %>
+    <p>
+      <b>Ausschreibungen zu dieser Veranstaltung</b>
+      <ul>
+        <% @tenders.each do |t| %>
+          <li><%= link_to "für den #{t.date}", tender_path(:id => t.id) %> (<% if t.ended? %>beendet<% else %>aktiv<% end %>)</li>
+        <% end %>
+      </ul>
+    </p>
+  <% end %>
+
   <% unless get_unadded_artist_groups(@sup_ag_groups).empty? %>
       <p>
         <b>Neuen Programmpunkt hinzufügen</b>

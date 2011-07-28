@@ -20,13 +20,12 @@
     <%= f.text_area :description %>
   </div>
   <div class="field">
-    <%= f.label :ended %><br />
+    <%= f.label :ended, 'Ausschreibung ist beendet?' %><br />
     <%= f.check_box :ended %>
   </div>
-  <div class="field">
-    <%= f.label :event %><br />
-    <%= f.text_field :event %>
-  </div>
+
+  <%= f.hidden_field :event_id, :value => @event_id %>
+
   <div class="actions">
     <%= f.submit %>
   </div>

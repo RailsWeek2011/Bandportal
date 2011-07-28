@@ -11,19 +11,28 @@
     </div>
   <% end %>
 
+  <%= f.hidden_field :tender_id, :value => @tender_id %>
+
   <div class="field">
-    <%= f.label :tender %><br />
-    <%= f.text_field :tender %>
+      <% if @candidature.artist_group_id.nil? %>  <%# New %>
+          <% if user_artg.length == 1 %>
+              <b>Künstlergruppe: </b><%= user_artg.first.name %>
+              <%= f.hidden_field :artist_group_id, :value => user_artg.first.groupable_id %>
+          <% else %>
+              <%= f.label :artist_group_id, 'Künstlergruppe' %>
+              <%= f.select :artist_group_id, options_for_select( user_artg.map do |uag| [uag.name, uag.groupable_id] end ) %>
+          <% end %>
+      <% else %>  <%# Edit %>
+          <b>Künstlergruppe: </b><%= get_sup_artist_group(@candidature.artist_group_id).name %>
+          <%= f.hidden_field :artist_group_id, :value => @candidature.artist_group_id %>
+      <% end %>
   </div>
+
   <div class="field">
-    <%= f.label :artist_group %><br />
-    <%= f.text_field :artist_group %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
+    <%= f.label :description, 'Bewerbungstext' %><br />
     <%= f.text_area :description %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Änderungen speichern' %>
   </div>
 <% end %>

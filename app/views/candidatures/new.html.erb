@@ -1,5 +1,15 @@
-<h1>New candidature</h1>
+<h1>Bewerbung schreiben</h1>
 
-<%= render 'form' %>
+<% if @tender_id.nil? %>
+    Hacken verboten!<br />
+<% else %>
+    <% users_artgroups = get_users_artist_groups(current_user.id) %>
+
+    <% if users_artgroups.empty? %>
+        Sie sind kein Mitglied in einer Künstlergruppe und können sich somit nicht bewerben.<br />
+    <% else %>
+        <%= render 'form', :user_artg => users_artgroups %>
+    <% end %>
+<% end %>
 
 <%= link_to 'Back', candidatures_path %>

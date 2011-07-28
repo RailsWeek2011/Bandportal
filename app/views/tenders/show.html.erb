@@ -11,13 +11,20 @@
 </p>
 
 <p>
-  <b>Ended:</b>
-  <%= @tender.ended %>
+  <% if @tender.ended %>
+    <b>Diese Ausschreibung ist abgelaufen.</b>
+  <% else %>
+    <b>Diese Ausschreibung ist aktiv.</b>
+  <% end %>
 </p>
 
 <p>
   <b>Event:</b>
-  <%= @tender.event %>
+  <% unless @tender.event.nil? %>
+    <%= link_to @tender.event.name, event_path(:id => @tender.event_id) %>
+  <% else %>
+    FEHLER
+  <% end %>
 </p>
 
 

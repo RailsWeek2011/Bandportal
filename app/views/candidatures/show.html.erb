@@ -1,17 +1,18 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Tender:</b>
-  <%= @candidature.tender %>
+  <b>Ausschreibung:</b>
+  <%= link_to "für den #{@candidature.tender.date}", tender_path(:id => @candidature.tender_id) %>
 </p>
 
 <p>
-  <b>Artist group:</b>
-  <%= @candidature.artist_group %>
+  <b>Gruppe:</b>
+  <% g = get_sup_artist_group(@candidature.artist_group_id) %>
+  <%= link_to g.name, group_path(:id => g.id) %>
 </p>
 
 <p>
-  <b>Description:</b>
+  <b>Bewerbungstext:</b>
   <%= @candidature.description %>
 </p>
 

@@ -1,10 +1,10 @@
-<h1>Listing candidatures</h1>
+<h1>Alle Bewerbungen</h1>
 
 <table>
   <tr>
-    <th>Tender</th>
-    <th>Artist group</th>
-    <th>Description</th>
+    <th>Ausschreibung</th>
+    <th>Künstlergruppe</th>
+    <th>Bewerbungstext</th>
     <th></th>
     <th></th>
     <th></th>
@@ -12,8 +12,11 @@
 
 <% @candidatures.each do |candidature| %>
   <tr>
-    <td><%= candidature.tender %></td>
-    <td><%= candidature.artist_group %></td>
+    <td><%= link_to "für den #{candidature.tender.date}", tender_path(:id => candidature.tender_id) %></td>
+    <td>
+      <% g = get_sup_artist_group(candidature.artist_group_id) %>
+      <%= link_to g.name, group_path(:id => g.id) %>
+    </td>
     <td><%= candidature.description %></td>
     <td><%= link_to 'Show', candidature %></td>
     <td><%= link_to 'Edit', edit_candidature_path(candidature) %></td>
@@ -21,7 +24,3 @@
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New Candidature', new_candidature_path %>

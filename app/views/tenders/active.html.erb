@@ -1,12 +1,11 @@
-<h1>Alle Ausschreibungen</h1>
+<h1>Listing tenders</h1>
 
 <table>
   <tr>
-    <th>für</th>
-    <th>Beschreibung</th>
+    <th>Date</th>
+    <th>Description</th>
     <th>Aktiv?</th>
     <th>Event</th>
-    <th></th>
     <th></th>
     <th></th>
   </tr>
@@ -18,8 +17,11 @@
     <td><%= not(tender.ended) %></td>
     <td><%= link_to tender.event.name, event_path(:id => tender.event_id) %></td>
     <td><%= link_to 'Show', tender %></td>
-    <td><%= link_to 'Edit', edit_tender_path(tender) %></td>
-    <td><%= link_to 'Destroy', tender, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Bewerben', new_candidature_id_path(:tender_id => tender.id) %></td>
   </tr>
 <% end %>
 </table>
+
+<br />
+
+<%= link_to 'New Tender', new_tender_path %>
