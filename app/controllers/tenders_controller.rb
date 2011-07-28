@@ -2,7 +2,7 @@ class TendersController < ApplicationController
   # GET /tenders
   # GET /tenders.json
   def index
-    @tenders = Tender.all
+    @tenders = Tender.order(:ended)
 
     respond_to do |format|
       format.html # index.html.erb

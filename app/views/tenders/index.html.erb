@@ -8,7 +8,6 @@
     <th>Event</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @tenders.each do |tender| %>
@@ -18,8 +17,11 @@
     <td><%= not(tender.ended) %></td>
     <td><%= link_to tender.event.name, event_path(:id => tender.event_id) %></td>
     <td><%= link_to 'Show', tender %></td>
-    <td><%= link_to 'Edit', edit_tender_path(tender) %></td>
-    <td><%= link_to 'Destroy', tender, confirm: 'Are you sure?', method: :delete %></td>
+    <td>
+      <% if user_signed_in? %>
+        <%= link_to 'Bewerben', new_candidature_id_path(:tender_id => tender.id) %>
+      <% end %>
+    </td>
   </tr>
 <% end %>
 </table>

@@ -190,7 +190,8 @@ m12.instruments << i3
 
 puts 'fertig.'
 
-#Nachrichten
+
+# Nachrichten
 
 puts 'Nachrichten werden versendet...'
 
@@ -199,5 +200,41 @@ pm1 = Message.create :sender => u9, :recipient => u10, :subject => 'Test',
 
 pm2 = Message.create :sender=> u10, :recipient => u9, :subject => 'Re: Test',
           :message => "Das ist eine Testantwort"
+
+puts 'fertig.'
+
+
+# Events
+
+puts 'Events werden eingetragen...'
+
+e1 = Event.create :name => 'Rock am Ring 2011', :host_group_id => 2, :location => 'Nuerburgring'
+e2 = Event.create :name => 'Rock im Park 2011', :host_group_id => 2
+
+e3 = Event.create :name => 'Rock am Ring 2012', :host_group_id => 2, :location => 'Nuerburgring'
+e4 = Event.create :name => 'Rock im Park 2012', :host_group_id => 2
+
+pi1 = ProgramItem.create :event => e1, :artist_group => ag1
+pi2 = ProgramItem.create :event => e1, :artist_group => ag2
+
+pi3 = ProgramItem.create :event => e2, :artist_group => ag1
+pi4 = ProgramItem.create :event => e2, :artist_group => ag3
+
+puts 'fertig.'
+
+
+# Ausschreibungen und Bewerbungen
+
+puts 'Ausschreibungen und Bewerbungen werden generiert...'
+
+t1 = Tender.create :event => e1, :ended => true, :description => "Fuer dieses Jahr suchen wir noch zwei Metal-Bands, die jeweils 60 Minuten spielen."
+c1 = Candidature.create :tender => t1, :artist_group => ag1, :description => "Wir koennen zwar nichts, moechten aber trotzdem spielen"
+c2 = Candidature.create :tender => t1, :artist_group => ag2, :description => "Wir spielen jetzt auch hart, obwohl wir tot sind."
+
+t2 = Tender.create :event => e4, :description => "Gesucht sind zwei Punk-Bands fuer Freitag-Abend. Spielzeit jewelis 45 Minuten."
+
+t3 = Tender.create :event => e4, :description => "Fuer Sonntag brauchen wir noch einen Opener fuer 30 Minuten. Stil egal."
+c3 = Candidature.create :tender => t3, :artist_group => ag3, :description => "Koennen wir"
+c4 = Candidature.create :tender => t3, :artist_group => ag2, :description => "Wir sind besser als die anderen."
 
 puts 'fertig.'
