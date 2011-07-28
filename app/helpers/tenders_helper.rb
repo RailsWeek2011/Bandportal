@@ -15,4 +15,8 @@ module TendersHelper
       return true
     end
   end
+
+  def get_candidation agid, tid
+    Candidature.where(:artist_group_id => agid, :tender_id => tid).first
+  end
 end

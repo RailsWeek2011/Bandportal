@@ -24,6 +24,6 @@
 
 </table>
 
-<%= link_to 'antworten', user_message_reply_path(:id => @message) %>
+<%= link_to 'antworten', user_message_reply_path(:id => @message.sender.id) %>
 |
 <%= link_to 'löschen', user_recipience_message_delete_path(@message), :method => :delete %>

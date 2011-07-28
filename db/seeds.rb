@@ -140,6 +140,9 @@ m14= Membership.create :group => g4, :userable => u10
 #Beatles-Fan-Gruppe
 m15= Membership.create :group => g5, :userable => u10
 
+#noch ein Metallica-Fanclub
+m19= Membership.create :group => g6, :userable => ur2
+
 #Bullshit Events
 m16= Membership.create :group => g7, :userable => ur1
 m17= Membership.create :group => g7, :userable => ur3

@@ -33,13 +33,18 @@
     <ul>
         <% @tender.artist_groups.each do |ag| %>
           <% g = get_sup_group_artist(ag.id) %>
-          <li><%= link_to g.name, group_path(:id => g.id) %></li>
+          <li>
+            <%= link_to g.name, group_path(:id => g.id) %>
+            <% if user_signed_in? && user_is_host_tender?(current_user.id, @tender.id) %>
+              (<%= link_to 'Bewerbung ansehen', candidature_path(:id => get_candidation(ag.id, @tender.id).id) %>)
+            <% end %>
+          </li>
         <% end %>
     </ul>
   </p>
 <% end %>
 
-<% if user_is_host_tender?(current_user.id, @tender.id) %>
+<% if user_signed_in? && user_is_host_tender?(current_user.id, @tender.id) %>
     <%= link_to 'Bearbeiten', edit_tender_path(@tender) %> |
 <% end %>
 

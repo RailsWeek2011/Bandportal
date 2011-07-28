@@ -51,9 +51,14 @@
 <% end %>
 
 <% unless @user.about.nil? || @user.about.length == 0 %>
-<p>
-  <b>&Uuml;ber sich selbst:</b><br />
-  <%= @user.about %>
-</p>
-<%= link_to "#{@user.nick} eine Nachricht senden", user_message_send_to_path(@user) %>
+    <p>
+      <b>&Uuml;ber sich selbst:</b><br />
+      <%= @user.about %>
+    </p>
+<% end %>
+
+<% if user_signed_in? && current_user.id != @user.id %>
+    <p>
+        <%= link_to "#{@user.nick} eine Nachricht senden", user_message_to_path(:user_id => @user.id) %>
+    </p>
 <% end %>

@@ -2,25 +2,24 @@
 
 <% sg = get_sup_group(@event.host_group_id) %>
 
-<p>
-  <b>Name:</b>
+<h1>
   <%= @event.name %>
-</p>
+</h1>
 
 <% unless @event.location.nil? %>
     <p>
-      <b>Location:</b>
+      <b>Ort:</b>
       <%= @event.location %>
     </p>
 <% end %>
 
 <p>
-  <b>Begin:</b>
+  <b>Beginn:</b>
   <%= @event.begin %>
 </p>
 
 <p>
-  <b>End:</b>
+  <b>Ende:</b>
   <%= @event.end %>
 </p>
 
@@ -71,6 +70,8 @@
   <% end %>
 <% end %>
 
+<% if user_signed_in? && user_is_host?(current_user.id, sg.id) %>
+    <%= link_to 'Bearbeiten', edit_event_path(@event) %> |
+<% end %>
 
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<%= link_to 'Zurueck', events_path %>

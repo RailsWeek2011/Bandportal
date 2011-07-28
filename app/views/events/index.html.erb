@@ -1,4 +1,4 @@
-<h1>Listing events</h1>
+<h1>Alle Veranstaltungen</h1>
 
 <table>
   <tr>
@@ -13,15 +13,20 @@
   </tr>
 
 <% @events.each do |event| %>
+  <% sg = get_sup_group(event.host_group_id) %>
+
   <tr>
     <td><%= event.name %></td>
     <td><%= event.location %></td>
     <td><%= event.begin %></td>
     <td><%= event.end %></td>
-    <td><%= get_sup_group(event.host_group_id).name %></td>
-    <td><%= link_to 'Show', event %></td>
-    <td><%= link_to 'Edit', edit_event_path(event) %></td>
-    <td><%= link_to 'Destroy', event, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= sg.name %></td>
+    <td><%= link_to 'Details', event %></td>
+
+    <% if user_signed_in? && user_is_host?(current_user.id, sg.id) %>
+        <td><%= link_to 'Bearbeiten', edit_event_path(event) %></td>
+        <td><%= link_to 'Loeschen', event, confirm: 'Are you sure?', method: :delete %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
