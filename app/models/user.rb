@@ -13,4 +13,6 @@ class User < ActiveRecord::Base
 
   has_many :memberships, :as => :userable
   has_many :groups, :through => :memberships
+  has_many :recieved_messages, :foreign_key => :recipient_id, :class_name => 'Message'
+  has_many :sent_messages, :foreign_key => :sender_id, :class_name => 'Message'
 end

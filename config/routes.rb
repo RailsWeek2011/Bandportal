@@ -1,4 +1,5 @@
 Bandportal::Application.routes.draw do
+
   get "tenders/active" => "tenders#active", :as => "tenders_active"
 
   resources :candidatures
@@ -6,6 +7,8 @@ Bandportal::Application.routes.draw do
   resources :tenders
 
   resources :events
+
+  get "message/show"
 
   resources :unregistered_users
 
@@ -16,6 +19,20 @@ Bandportal::Application.routes.draw do
   get "home/index"
 
   devise_for :users
+
+  get "users/message" => "message#show", :as => "user_message"
+
+  get "users/message/recipience" => "message#recipience", :as => "user_recipience_message"
+  get "users/message/:id/recipience/read" => "message#recipience_read", :as => "user_recipience_message_read"
+  delete "users/message/:id/recipience/delete" => "message#recipience_delete", :as => "user_recipience_message_delete"
+
+  get "users/message/sent" => "message#sent", :as => "user_sent_message"
+  get "users/message/:id/sent/read" => "message#sent_read", :as => "user_sent_message_read"
+  delete "users/message/:id/sent/delete" => "message#sent_delete", :as => "user_sent_message_delete"
+
+  get "users/message/send_to/:id" => "message#send_to", :as => "user_message_reply"
+  get "users/message/send_to" => "message#send_to", :as => "user_message_send_to"
+  post "users/message/send_message" => "message#send_message", :as => "send_message"
 
   get "users/:id" => "users#show", :as => "user_profile"
 

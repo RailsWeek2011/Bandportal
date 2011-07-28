@@ -90,6 +90,21 @@ ActiveRecord::Schema.define(:version => 20110727143128) do
 
   add_index "memberships", ["group_id"], :name => "index_memberships_on_group_id"
 
+  create_table "messages", :force => true do |t|
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.boolean  "sender_deleted",    :default => false
+    t.boolean  "recipient_deleted", :default => false
+    t.boolean  "read",              :default => false
+    t.string   "subject"
+    t.text     "message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "messages", ["recipient_id"], :name => "index_messages_on_recipient_id"
+  add_index "messages", ["sender_id"], :name => "index_messages_on_sender_id"
+
   create_table "program_items", :force => true do |t|
     t.integer  "event_id"
     t.integer  "artist_group_id"

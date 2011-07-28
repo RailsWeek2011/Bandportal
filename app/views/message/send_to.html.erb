@@ -1,0 +1,42 @@
+<h1>Nachricht verfassen</h1>
+
+<%= form_for(@message, :url => send_message_path) do |f| %>
+
+  <% if @message.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@message.errors.count, "error") %> prohibited this group from being saved:</h2>
+
+      <ul>
+      <% @message.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :sender_id, :value => @sender.id %>
+  <%# f.hidden_field :recipient_id, :value => @recipient.id %>
+
+  <div class="field">
+    <% if @message.recipient_id.nil? %>
+        <%= f.select :recipient_id, options_for_select( get_other_users(current_user.id).map do |u| [u.nick, u.id] end ) %>
+    <% else %>
+        <b>Empfänger:</b> <%= @message.recipient.nick %>
+        <%= f.hidden_field :recipient_id, :value => @message.recipient_id %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :subject, 'Betreff' %>
+    <%= f.text_field :subject %>
+  </div>
+
+  <div class="field">
+    <%= f.label :message, 'Nachricht' %> <br />
+    <%= f.text_area :message, :size => "40x10"  %>
+  </div>
+
+  <div class="field">
+    <%= submit_tag 'Senden' %>
+  </div>
+<% end %>
