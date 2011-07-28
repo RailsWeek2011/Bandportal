@@ -21,7 +21,8 @@ Bandportal::Application.routes.draw do
   get "users/message/:id/sent/read" => "message#sent_read", :as => "user_sent_message_read"
   delete "users/message/:id/sent/delete" => "message#sent_delete", :as => "user_sent_message_delete"
 
-  get "users/message/send_to/:id" => "message#send_to", :as => "user_message_send_to"
+  get "users/message/send_to/:id" => "message#send_to", :as => "user_message_reply"
+  get "users/message/send_to" => "message#send_to", :as => "user_message_send_to"
   post "users/message/send_message" => "message#send_message", :as => "send_message"
 
   get "users/:id" => "users#show", :as => "user_profile"

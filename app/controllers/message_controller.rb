@@ -63,7 +63,19 @@ class MessageController < ApplicationController
   end
 
   def send_to
+    if params[:id].nil?
+      @message = Message.new
+    else
+      m = Message.find(params[:id])
+      @message = Message.new(:recipient_id => m.sender_id, :subject => "Re: #{m.subject}")
+    end
+
     @sender = current_user
-    @recipient = User.find(params[:id])
+  end
+
+  def send_message
+    @message = Message.create(params[:message])
+
+    redirect_to user_message_path
   end
 end
