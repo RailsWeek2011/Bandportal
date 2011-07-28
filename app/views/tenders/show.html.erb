@@ -1,12 +1,12 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Date:</b>
+  <b>Datum:</b>
   <%= @tender.date %>
 </p>
 
 <p>
-  <b>Description:</b>
+  <b>Ausschreibungstext:</b>
   <%= @tender.description %>
 </p>
 
@@ -27,6 +27,21 @@
   <% end %>
 </p>
 
+<% unless @tender.artist_groups.empty? %>
+  <p>
+    <b>Bewerbende Gruppen:</b>
+    <ul>
+        <% @tender.artist_groups.each do |ag| %>
+          <% g = get_sup_group_artist(ag.id) %>
+          <li><%= link_to g.name, group_path(:id => g.id) %></li>
+        <% end %>
+    </ul>
+  </p>
+<% end %>
 
-<%= link_to 'Edit', edit_tender_path(@tender) %> |
-<%= link_to 'Back', tenders_path %>
+<% if user_is_host_tender?(current_user.id, @tender.id) %>
+    <%= link_to 'Bearbeiten', edit_tender_path(@tender) %> |
+<% end %>
+
+<%= link_to 'Zurueck', tenders_path %>
+

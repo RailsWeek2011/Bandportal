@@ -7,10 +7,12 @@
   <%= @event.name %>
 </p>
 
-<p>
-  <b>Location:</b>
-  <%= @event.location %>
-</p>
+<% unless @event.location.nil? %>
+    <p>
+      <b>Location:</b>
+      <%= @event.location %>
+    </p>
+<% end %>
 
 <p>
   <b>Begin:</b>

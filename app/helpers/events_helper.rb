@@ -1,6 +1,6 @@
 module EventsHelper
   def get_sup_group id
-    Group.where("groupable_type = 'HostGroup' AND groupable_id = ?", id).first
+    Group.where(:groupable_type => 'HostGroup', :groupable_id => id).first
   end
 
   def user_is_host? uid, gid
